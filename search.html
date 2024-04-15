@@ -28,12 +28,14 @@
       <tbody id="result"></tbody>
     </table>
 
+    <script src="configuration.js"></script>
     <script>
       let ducks = [];
 
       async function getAll() {
-        let host = "http://localhost:8080";
-        return fetch(host + "/ducks")
+        let host = configuration.host();
+        const headers = { "Authorization": `Bearer ${configuration.token()}`};
+        return fetch(host + "/ducks", { headers })
           .then((response) => response.json())
           .catch((error) => {
             console.log(error);
